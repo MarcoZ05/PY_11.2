@@ -62,7 +62,6 @@ def ganze_hand_ziehen(stapel, hand):
 
 
 def hand_auswählen(hand, ablage):
-    print("")
     print("Ihre Hand hat die Karten: ")
     stapel_zeigen(hand)
     print("Der Ablagestapel hat die Karte: " +
@@ -73,9 +72,19 @@ def hand_auswählen(hand, ablage):
 # gibt hand aus und fragt nach input zum kartenlegen
 
 
-def karte_legen(hand, ablage):
+def pruefe_karten(karte1_index, karte2_index):
+    karte1_symbol = karte1_index % 4
+    karte1_wert = int((karte1_index+(4-karte1_symbol))/4)
+    karte2_symbol = karte2_index % 4
+    karte2_wert = int((karte2_index+(4-karte2_symbol))/4)
+    if karte1_symbol == karte2_symbol or karte1_wert == karte2_wert:
+        return True
+    return False
+
+
+def karte_legen(stapel, hand, ablage):
     gewählte_zahl = hand_auswählen(hand, ablage)
-    while not gewählte_zahl < len(hand):
+    while not gewählte_zahl < len(hand) and not pruefe_karten(hand[gewählte_zahl], ablage[-1]):
         print(gewählte_zahl, " ist nicht auf ihrer Hand")
         gewählte_zahl = hand_auswählen(hand, ablage)
     karte_verschieben(hand, ablage, gewählte_zahl)
@@ -90,7 +99,7 @@ karte_verschieben(kartenstapel, ablagestapel,
                   random.randint(0, (len(kartenstapel)-1)))
 ganze_hand_ziehen(kartenstapel, kartenhand)
 while len(kartenhand) != 0:
-    karte_legen(kartenhand, ablagestapel)
+    karte_legen(kartenstapel, kartenhand, ablagestapel)
 
 print("")
 print("Kartenstapel:")
