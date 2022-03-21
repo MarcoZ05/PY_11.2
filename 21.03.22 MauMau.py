@@ -1,38 +1,9 @@
 import random
 
-switch_karten_symbol = {
-    0: "Herz",
-    1: "Kreuz",
-    2: "Pick",
-    3: "Karo",
-}
-# switch objekt um von symbol index zu symbol name zu kommen
-
-switch_karten_wert = {
-    1: "7",
-    2: "8",
-    3: "9",
-    4: "10",
-    5: "Bauer",
-    6: "Dame",
-    7: "Koenig",
-    8: "Ass",
-}
-# switch objekt um von wert index zu wert name zu kommen
-
-
-def karten_wertigkeit(karten_index):
-    karten_symbol = karten_index % 4
-    karten_wert = int((karten_index+(4-karten_symbol))/4)
-    karten_name = str(switch_karten_symbol.get(karten_symbol)) + \
-        " " + str(switch_karten_wert.get(karten_wert))
-    return karten_name
-# wandelt karten index zu kartenname und returnt diesen
-
 
 def stapel_zeigen(stapel):
     for i in range(0, len(stapel)):
-        print(karten_wertigkeit(stapel[i])+" => "+str(i))
+        print(i)
 # gib alle karten eines stapels mit name und index aus
 
 
@@ -63,8 +34,6 @@ def hand_auswählen(hand, ablage):
     print("")
     print("Ihre Hand hat die Karten: ")
     stapel_zeigen(hand)
-    print("Der Ablagestapel hat die Karte: " +
-          str(karten_wertigkeit(ablage[-1])))
     gewählte_zahl = int(input(
         "Bitte geben sie den Index einer Karte ihrer Hand ein: "))
     return gewählte_zahl
@@ -87,8 +56,7 @@ ablagestapel = []
 karte_verschieben(kartenstapel, ablagestapel,
                   random.randint(0, (len(kartenstapel)-1)))
 ganze_hand_ziehen(kartenstapel, kartenhand)
-while len(kartenhand) != 0:
-    karte_legen(kartenhand, ablagestapel)
+karte_legen(kartenhand, ablagestapel)
 
 print("")
 print("Kartenstapel:")
