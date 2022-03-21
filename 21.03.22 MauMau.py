@@ -30,25 +30,6 @@ def ganze_hand_ziehen(stapel, hand):
 # zieht 7 karten von kartenstapel auf hand
 
 
-def hand_auswählen(hand, ablage):
-    print("")
-    print("Ihre Hand hat die Karten: ")
-    stapel_zeigen(hand)
-    gewählte_zahl = int(input(
-        "Bitte geben sie den Index einer Karte ihrer Hand ein: "))
-    return gewählte_zahl
-# gibt hand aus und fragt nach input zum kartenlegen
-
-
-def karte_legen(hand, ablage):
-    gewählte_zahl = hand_auswählen(hand, ablage)
-    while not gewählte_zahl < len(hand):
-        print(gewählte_zahl, " ist nicht auf ihrer Hand")
-        gewählte_zahl = hand_auswählen(hand, ablage)
-    karte_verschieben(hand, ablage, gewählte_zahl)
-# legt karte wenn diese auf der hand ist
-
-
 kartenstapel = stapel_erstellen()
 kartenhand = []
 ablagestapel = []
@@ -56,7 +37,6 @@ ablagestapel = []
 karte_verschieben(kartenstapel, ablagestapel,
                   random.randint(0, (len(kartenstapel)-1)))
 ganze_hand_ziehen(kartenstapel, kartenhand)
-karte_legen(kartenhand, ablagestapel)
 
 print("")
 print("Kartenstapel:")
