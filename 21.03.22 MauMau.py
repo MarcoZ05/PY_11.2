@@ -1,5 +1,3 @@
-from distutils.log import error
-from operator import ge
 import random
 
 switch_karten_symbol = {
