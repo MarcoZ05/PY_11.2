@@ -58,7 +58,7 @@ def moveSelectedCard(deck1, deck2, index):
 
 def printDeck(deck):
     for i in range(0, len(deck)):
-        print(deckName(deck[i])+" => "+str(i+1))
+        print(f"{deckName(deck[i])} => {(i+1)}")
 
 
 def playCard(thisHand, discDeck):
@@ -73,13 +73,13 @@ def playCard(thisHand, discDeck):
     if cardIndex < 0 or cardIndex >= len(thisHand):
         print("")
         print("")
-        print("Ungueltige Eingabe: " + str(cardIndex+1))
+        print(f"Ungueltige Eingabe: {(cardIndex+1)}")
         playCard(thisHand, discDeck)
         return
     elif getCardSymbol(thisHand[cardIndex]) != getCardSymbol(discDeck[-1]) and getCardValue(thisHand[cardIndex]) != getCardValue(discDeck[-1]):
         print("")
         print("")
-        print("Diese Karte passt nicht: " + str(cardIndex+1))
+        print(f"Diese Karte passt nicht: {(cardIndex+1)}")
         playCard(thisHand, discDeck)
         return
 
@@ -107,7 +107,7 @@ def game(playerAmount):
     player = 0
     while len(handDecks[player]) != 0:
         thisHand = handDecks[player]
-        print("Player "+str(player+1))
+        print("Player {(player+1)}")
         playCard(thisHand, discDeck)
 
         if player == playerAmount-1:
@@ -115,7 +115,7 @@ def game(playerAmount):
         else:
             player += 1
 
-    print("Spieler "+str(player+1)+" hat gewonnen.")
+    print(f"Spieler {(player+1)} hat gewonnen.")
     print("Uebrige Karten:")
     for i in range(0, playerAmount):
         printDeck(handDecks[player])
