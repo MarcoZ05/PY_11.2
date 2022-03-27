@@ -42,7 +42,10 @@ def createDeck():
     return deck
 
 
-def moveRandomCard(deck1, amount):
+def moveRandomCard(deck1, amount=1):
+    if len(deck1) == 0:
+        print("Es ist nichtz möglich eine neue Karte zu ziehen")
+        return
     deck2 = []
     for i in range(0, amount):
         randomNum = random.randint(0, len(deck1)-1)
@@ -61,7 +64,25 @@ def printDeck(deck):
         print(f"{deckName(deck[i])} => {(i+1)}")
 
 
-def playCard(thisHand, discDeck):
+def hasFittingCard(thisHand, discCard):
+    for i in range(0, len(thisHand)):
+        if getCardSymbol(thisHand[i]) == getCardSymbol(discCard) or getCardValue(thisHand[i]) == getCardValue(discCard):
+            return True
+        return False
+
+
+def playCard(mainDeck, thisHand, discDeck, draw=False):
+    if not hasFittingCard(thisHand, discDeck[-1]):
+        if draw:
+            print("Du hast keine Karte zum Spielen!")
+            print("")
+            return
+        else:
+            print("Du musst eine Karte ziehen!")
+            thisHand.append(moveRandomCard(mainDeck))
+            playCard(mainDeck, thisHand, discDeck, True)
+            return
+
     print("")
     print("Deine Karten:")
     printDeck(thisHand)
@@ -74,13 +95,13 @@ def playCard(thisHand, discDeck):
         print("")
         print("")
         print(f"Ungueltige Eingabe: {(cardIndex+1)}")
-        playCard(thisHand, discDeck)
+        playCard(mainDeck, thisHand, discDeck)
         return
     elif getCardSymbol(thisHand[cardIndex]) != getCardSymbol(discDeck[-1]) and getCardValue(thisHand[cardIndex]) != getCardValue(discDeck[-1]):
         print("")
         print("")
         print(f"Diese Karte passt nicht: {(cardIndex+1)}")
-        playCard(thisHand, discDeck)
+        playCard(mainDeck, thisHand, discDeck)
         return
 
     moveSelectedCard(thisHand, discDeck, cardIndex)
@@ -101,14 +122,14 @@ def game(playerAmount):
     handDecks = []
     for i in range(0, playerAmount):
         handDecks.append(moveRandomCard(mainDeck, 7))
-    discDeck = moveRandomCard(mainDeck, 1)
+    discDeck = moveRandomCard(mainDeck)
 
     # game loop
     player = 0
     while len(handDecks[player]) != 0:
         thisHand = handDecks[player]
         print(f"Player {(player+1)}")
-        playCard(thisHand, discDeck)
+        playCard(mainDeck, thisHand, discDeck)
 
         if player == playerAmount-1:
             player = 0
