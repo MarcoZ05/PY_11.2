@@ -1,10 +1,10 @@
 import random
 
 cardSymbolSwitch = {
-    0: "hearts",
-    1: "tiles",
-    2: "clovers",
-    3: "pikes",
+    0: "Herz",
+    1: "Kreuz",
+    2: "Karo",
+    3: "Pick",
 }
 
 cardValueSwitch = {
@@ -12,10 +12,10 @@ cardValueSwitch = {
     2: "8",
     3: "9",
     4: "10",
-    5: "jack",
-    6: "queen",
-    7: "king",
-    8: "ace",
+    5: "Bube",
+    6: "Dame",
+    7: "Koenig",
+    8: "Ass",
 }
 
 
@@ -63,23 +63,23 @@ def printDeck(deck):
 
 def playCard(thisHand, discDeck):
     print("")
-    print("Your Cards:")
+    print("Deine Karten:")
     printDeck(thisHand)
     print("")
-    print("The discard is: "+deckName(discDeck[-1]))
+    print("Ablagestapel: "+deckName(discDeck[-1]))
 
-    cardIndex = int(input("Insert a card-index: "))-1
+    cardIndex = int(input("Gebe einen Kartenindex ein: "))-1
 
     if cardIndex < 0 or cardIndex >= len(thisHand):
         print("")
         print("")
-        print("Invalid card-index: " + str(cardIndex+1))
+        print("Ungueltige Eingabe: " + str(cardIndex+1))
         playCard(thisHand, discDeck)
         return
     elif getCardSymbol(thisHand[cardIndex]) != getCardSymbol(discDeck[-1]) and getCardValue(thisHand[cardIndex]) != getCardValue(discDeck[-1]):
         print("")
         print("")
-        print("Not fitting card-index: " + str(cardIndex+1))
+        print("Diese Karte passt nicht: " + str(cardIndex+1))
         playCard(thisHand, discDeck)
         return
 
@@ -90,10 +90,10 @@ def playCard(thisHand, discDeck):
 def game(playerAmount):
     # stop game if playerAmount is not valid
     if(playerAmount > 3):
-        print("The max amount of players is 3!")
+        print("Das Maximum der Spieler ist 3!")
         return
     if(playerAmount < 2):
-        print("The min amount of players is 2!")
+        print("Das Minimum der Spieler ist 2!")
         return
 
     # creates all decks
@@ -115,8 +115,8 @@ def game(playerAmount):
         else:
             player += 1
 
-    print("Player "+str(player+1)+" won the Game.")
-    print("Remaining cards:")
+    print("Spieler "+str(player+1)+" hat gewonnen.")
+    print("Uebrige Karten:")
     for i in range(0, playerAmount):
         printDeck(handDecks[player])
 
