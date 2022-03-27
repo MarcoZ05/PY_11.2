@@ -42,7 +42,15 @@ def createDeck():
     return deck
 
 
-def moveRandomCard(deck1, amount=1):
+def moveSelectedCard(deck1, deck2, index):
+    deck2.append(deck1[index])
+    del deck1[index]
+
+
+def moveRandomCard(deck1, discDeck, amount=1):
+    if len(deck1) == 0 and len(discDeck) > 1:
+        for i in range(0, len(discDeck)-1):
+            moveSelectedCard(discDeck, deck1, i)
     if len(deck1) == 0:
         print("Es ist nichtz möglich eine neue Karte zu ziehen")
         return
@@ -52,11 +60,6 @@ def moveRandomCard(deck1, amount=1):
         deck2.append(deck1[randomNum])
         del deck1[randomNum]
     return deck2
-
-
-def moveSelectedCard(deck1, deck2, index):
-    deck2.append(deck1[index])
-    del deck1[index]
 
 
 def printDeck(deck):
@@ -79,7 +82,7 @@ def playCard(mainDeck, thisHand, discDeck, draw=False):
             return
         else:
             print("Du musst eine Karte ziehen!")
-            thisHand.append(moveRandomCard(mainDeck))
+            thisHand.append(moveRandomCard(mainDeck, discDeck))
             playCard(mainDeck, thisHand, discDeck, True)
             return
 
@@ -121,8 +124,8 @@ def game(playerAmount):
     mainDeck = createDeck()
     handDecks = []
     for i in range(0, playerAmount):
-        handDecks.append(moveRandomCard(mainDeck, 7))
-    discDeck = moveRandomCard(mainDeck)
+        handDecks.append(moveRandomCard(mainDeck, discDeck, 7))
+    discDeck = moveRandomCard(mainDeck, discDeck)
 
     # game loop
     player = 0
