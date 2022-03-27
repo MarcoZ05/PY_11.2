@@ -124,8 +124,8 @@ def game(playerAmount):
     mainDeck = createDeck()
     handDecks = []
     for i in range(0, playerAmount):
-        handDecks.append(moveRandomCard(mainDeck, discDeck, 7))
-    discDeck = moveRandomCard(mainDeck, discDeck)
+        handDecks.append(moveRandomCard(mainDeck, [], 7))
+    discDeck = moveRandomCard(mainDeck, [])
 
     # game loop
     player = 0
