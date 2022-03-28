@@ -71,7 +71,7 @@ def hasFittingCard(thisHand, discCard):
     for i in range(0, len(thisHand)):
         if getCardSymbol(thisHand[i]) == getCardSymbol(discCard) or getCardValue(thisHand[i]) == getCardValue(discCard):
             return True
-        return False
+    return False
 
 
 def playCard(mainDeck, thisHand, discDeck, draw=False):
@@ -103,7 +103,7 @@ def playCard(mainDeck, thisHand, discDeck, draw=False):
     elif getCardSymbol(thisHand[cardIndex]) != getCardSymbol(discDeck[-1]) and getCardValue(thisHand[cardIndex]) != getCardValue(discDeck[-1]):
         print("")
         print("")
-        print(f"Diese Karte passt nicht: {(cardIndex+1)}")
+        print(f"Diese Karte passt nicht: {deckName(cardIndex+1)}")
         playCard(mainDeck, thisHand, discDeck)
         return
 
@@ -145,4 +145,4 @@ def game(playerAmount):
         printDeck(handDecks[player])
 
 
-game(3)
+game(2)
